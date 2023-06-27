@@ -1,0 +1,32 @@
+{
+  "name": "weatherapi",
+  "version": "1.0.0",
+  "description": "Weather API",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramazansancar/weatherApi.git"
+  },
+  "keywords": [],
+  "author": "Ramazan Sancar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramazansancar/weatherApi/issues"
+  },
+  "homepage": "https://github.com/ramazansancar/weatherApi#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
