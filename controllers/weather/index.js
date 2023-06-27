@@ -56,7 +56,10 @@ export const getWeatherbyLatLong = asyncHandler(async (req, res) => {
     const { lat, long } = req.params;
     const { units, lang } = req.query;
 
-    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&lat=${lat}&lon=${long}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`);
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&lat=${lat}&lon=${long}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`).catch((err) => {
+        err.config.url = (err.config.url) ? err.config.url.replace(process.env.OPENWEATHERMAP_API_KEY, '[secret]') : null;
+        return errorMessage(res, err.message, req.params, err, 400);
+    });
 
     if (data.cod === 200) {
         let result = {
@@ -100,7 +103,10 @@ export const getWeather = asyncHandler(async (req, res) => {
     const { units, lang } = req.query;
 
     if (city) {
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&q=${city}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`);
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&q=${city}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`).catch((err) => {
+            err.config.url = (err.config.url) ? err.config.url.replace(process.env.OPENWEATHERMAP_API_KEY, '[secret]') : null;
+            return errorMessage(res, err.message, req.params, err, 400);
+        });
 
         if (data.cod === 200) {
             let result = {
@@ -135,7 +141,10 @@ export const getWeather = asyncHandler(async (req, res) => {
             return errorMessage(res, '404 Not Found', req.params, '404 Not Found', 404);
         }
     } else if (lat && long) {
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&lat=${lat}&lon=${long}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`);
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPENWEATHERMAP_API_KEY}&lat=${lat}&lon=${long}&lang=${(lang)?lang:'en'}&units=${(units)?units:'metrics'}`).catch((err) => {
+            err.config.url = (err.config.url) ? err.config.url.replace(process.env.OPENWEATHERMAP_API_KEY, '[secret]') : null;
+            return errorMessage(res, err.message, req.params, err, 400);
+        });
 
         if (data.cod === 200) {
             let result = {
