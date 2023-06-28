@@ -2,6 +2,7 @@
 
 - https://weatherapi.cyclic.app/weather/30.1667/39.8333?units=metric&lang=tr
 - https://weatherapi.cyclic.app/weather/Ankara?units=metric&lang=tr
+- https://weatherapi.cyclic.app/weather/find/30.1667/39.8333?units=metric&lang=tr&count=2 (Count max: 50)
 
 ## Metrics
 
