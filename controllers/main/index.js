@@ -1,4 +1,4 @@
-const main = async (req, res) => {
+export const main = async (req, res) => {
     //const { * } = req.params;
 
     return res
@@ -9,16 +9,11 @@ const main = async (req, res) => {
         });
 };
 
-const healtCheck = async (req, res) => {
+export const healtCheck = async (req, res) => {
     return res
         .status(200)
         .json({
             status: true,
             data: "ok",
         })
-}
-
-export {
-    main,
-    healtCheck,
 }

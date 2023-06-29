@@ -18,7 +18,7 @@ router.get("/weather/:city", weatherController.getWeatherbyCity);
 router.get("/weather/:lat/:long", weatherController.getWeatherbyLatLong);
 
 router.get("*", (req, res) => {
-    return errorMessage(res, '404 Not Found', req.params, '404 Not Found', 404)
+    return errorMessage(res, "404 Not Found", req.params, "404 Not Found", 404)
 });
 
 export default router;
