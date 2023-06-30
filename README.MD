@@ -1,8 +1,24 @@
 # weatherApi
 
-- https://weatherapi.cyclic.app/weather/30.1667/39.8333?units=metric&lang=tr
-- https://weatherapi.cyclic.app/weather/Ankara?units=metric&lang=tr
-- https://weatherapi.cyclic.app/weather/find/30.1667/39.8333?units=metric&lang=tr&count=2 (Count max: 50)
+## Example Requests:
+
+- Health Check
+    - https://weatherapi.cyclic.app/healthcheck
+
+- Weather Now by Lat/Long
+    - https://weatherapi.cyclic.app/weather/30.1667/39.8333?units=metric&lang=tr
+
+- Weather Now by City Name
+    - https://weatherapi.cyclic.app/weather/Ankara?units=metric&lang=tr
+
+- Weather Find by Lat/Long
+    - https://weatherapi.cyclic.app/weather/find/30.1667/39.8333?units=metric&lang=tr&count=2 (Count max: 50)
+
+- Weather Weekly by Lat/Long
+    - https://weatherapi.cyclic.app/weather/weekly/30.1667/39.8333?units=metric&lang=tr&count=40 (Count max: 40)
+
+- Weather Weekly by City Name
+    - https://weatherapi.cyclic.app/weather/weekly/Ankara?units=metric&lang=tr&count=40 (Count max: 40)
 
 ## Metrics
 

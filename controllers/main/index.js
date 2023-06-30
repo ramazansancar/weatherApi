@@ -6,10 +6,11 @@ export const main = async (req, res) => {
         .json({
             status: true,
             message: "Weather API Up :)",
+            github: "https://github.com/ramazansancar/weatherApi"
         });
 };
 
-export const healtCheck = async (req, res) => {
+export const healthCheck = async (req, res) => {
     return res
         .status(200)
         .json({
