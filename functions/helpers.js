@@ -92,6 +92,7 @@ export const requestWeeklyObject = (data) => {
         }*/
         //days[day].push({
         days.push({
+            id: i+1,
             datetime: (data.list[i].dt) ? convertTimestamp(data.list[i].dt, languageCode, timeZoneString) : null,
             date: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0],
             time: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1],
