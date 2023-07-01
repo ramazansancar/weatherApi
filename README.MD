@@ -66,7 +66,7 @@
 | pt_br | Português | Brasil |
 | ro | Romanian |
 | ru | Russian |
-| sv, | se | Swedish |
+| sv, se | Swedish |
 | sk | Slovak |
 | sl | Slovenian |
 | sp, | es | Spanish |

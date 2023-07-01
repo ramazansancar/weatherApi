@@ -85,37 +85,36 @@ export const requestWeeklyObject = (data) => {
     }
     for (let i = 0; i < data.list.length; i++) {
         let day = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
-        // 18_00
-        let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
+        //let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
+        let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1];
         if(!days[day]){
-            days[day] = {};
+            days[day] = [];
         }
-        if(!days[day][time]){
-            days[day][time] = {
-                datetime: (data.list[i].dt) ? convertTimestamp(data.list[i].dt, languageCode, timeZoneString) : null,
-                temp: (data.list[i].main.temp) ? data.list[i].main.temp : null,
-                temp_feels_like: (data.list[i].main.feels_like) ? data.list[i].main.feels_like : null,
-                temp_min: (data.list[i].main.temp_min) ? data.list[i].main.temp_min : null,
-                temp_max: (data.list[i].main.temp_max) ? data.list[i].main.temp_max : null,
-                temp_kf: (data.list[i].main.temp_kf) ? data.list[i].main.temp_kf : null,
-                pressure: (data.list[i].main.pressure) ? data.list[i].main.pressure : null,
-                humidity: (data.list[i].main.humidity) ? data.list[i].main.humidity : null,
-                sea_level: (data.list[i].main.sea_level) ? data.list[i].main.sea_level : null,
-                grnd_level: (data.list[i].main.grnd_level) ? data.list[i].main.grnd_level : null,
-                weather: (data.list[i].weather[0].main) ? data.list[i].weather[0].main : null,
-                weather_description: (data.list[i].weather[0].description) ? data.list[i].weather[0].description : null,
-                weather_icon: (data.list[i].weather[0].icon) ? data.list[i].weather[0].icon : null,
-                clouds: (data.list[i].clouds.all) ? data.list[i].clouds.all : null,
-                wind_speed: (data.list[i].wind.speed) ? data.list[i].wind.speed : null,
-                wind_deg: (data.list[i].wind.deg) ? data.list[i].wind.deg : null,
-                wind_gust: (data.list[i].wind.gust) ? data.list[i].wind.gust : null,
-                rain_pop: (data.list[i].pop) ? data.list[i].pop*100 : null,
-                rain_3h: (data.list[i].rain) ? data.list[i].rain["3h"] : null,
-                snow_3h: (data.list[i].snow) ? data.list[i].snow["3h"] : null,
-                pod: (data.list[i].sys.pod) ? (data.list[i].sys.pod === "n" ? "night" : (data.list[i].sys.pod === "d" ? "day" : data.list[i].sys.pod)) : null,
-                clouds: (data.list[i].clouds.all) ? data.list[i].clouds.all : null,
-            };
-        }
+        days[day].push({
+            datetime: (data.list[i].dt) ? convertTimestamp(data.list[i].dt, languageCode, timeZoneString) : null,
+            date: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0],
+            time: time,
+            temp: (data.list[i].main.temp) ? data.list[i].main.temp : null,
+            temp_feels_like: (data.list[i].main.feels_like) ? data.list[i].main.feels_like : null,
+            temp_min: (data.list[i].main.temp_min) ? data.list[i].main.temp_min : null,
+            temp_max: (data.list[i].main.temp_max) ? data.list[i].main.temp_max : null,
+            temp_kf: (data.list[i].main.temp_kf) ? data.list[i].main.temp_kf : null,
+            pressure: (data.list[i].main.pressure) ? data.list[i].main.pressure : null,
+            humidity: (data.list[i].main.humidity) ? data.list[i].main.humidity : null,
+            sea_level: (data.list[i].main.sea_level) ? data.list[i].main.sea_level : null,
+            grnd_level: (data.list[i].main.grnd_level) ? data.list[i].main.grnd_level : null,
+            weather: (data.list[i].weather[0].main) ? data.list[i].weather[0].main : null,
+            weather_description: (data.list[i].weather[0].description) ? data.list[i].weather[0].description : null,
+            weather_icon: (data.list[i].weather[0].icon) ? data.list[i].weather[0].icon : null,
+            clouds: (data.list[i].clouds.all) ? data.list[i].clouds.all : null,
+            wind_speed: (data.list[i].wind.speed) ? data.list[i].wind.speed : null,
+            wind_deg: (data.list[i].wind.deg) ? data.list[i].wind.deg : null,
+            wind_gust: (data.list[i].wind.gust) ? data.list[i].wind.gust : null,
+            rain_pop: (data.list[i].pop) ? data.list[i].pop*100 : null,
+            rain_3h: (data.list[i].rain) ? data.list[i].rain["3h"] : null,
+            snow_3h: (data.list[i].snow) ? data.list[i].snow["3h"] : null,
+            pod: (data.list[i].sys.pod) ? (data.list[i].sys.pod === "n" ? "night" : (data.list[i].sys.pod === "d" ? "day" : data.list[i].sys.pod)) : null,
+        });
     }
 
     return {
@@ -127,40 +126,9 @@ export const requestWeeklyObject = (data) => {
         lat: (data.city.coord.lat) ? data.city.coord.lat : null,
         long: (data.city.coord.lon) ? data.city.coord.lon : null,
         timezone: (data.city.timezone) ? data.city.timezone : null,
-        datetime: (data.list[0].dt) ? convertTimestamp(data.list[0].dt, languageCode, timeZoneString) : null,
-        base: (data.list[0].base) ? data.list[0].base : null,
         sunrise: (data.city.sunrise) ? convertTimestamp(data.city.sunrise, languageCode, timeZoneString) : null,
         sunset: (data.city.sunset) ? convertTimestamp(data.city.sunset, languageCode, timeZoneString) : null,
         days
-
-    }
-    return {
-        timezone: (data.city.timezone) ? data.city.timezone : null,
-        datetime: (data.list[0].dt) ? convertTimestamp(data.list[0].dt, languageCode, timeZoneString) : null,
-        base: (data.list[0].base) ? data.list[0].base : null,
-        visibility: (data.list[0].visibility) ? data.list[0].visibility : null,
-        weather: (data.list[0].weather[0].main) ? data.list[0].weather[0].main : null,
-        weather_description: (data.list[0].weather[0].description) ? data.list[0].weather[0].description : null,
-        weather_icon: (data.list[0].weather[0].icon) ? data.list[0].weather[0].icon : null,
-        temp: (data.list[0].main.temp) ? data.list[0].main.temp : null,
-        temp_min: (data.list[0].main.temp_min) ? data.list[0].main.temp_min : null,
-        temp_max: (data.list[0].main.temp_max) ? data.list[0].main.temp_max : null,
-        pressure: (data.list[0].main.pressure) ? data.list[0].main.pressure : null,
-        humidity: (data.list[0].main.humidity) ? data.list[0].main.humidity : null,
-        wind_speed: (data.list[0].wind.speed) ? data.list[0].wind.speed : null,
-        wind_deg: (data.list[0].wind.deg) ? data.list[0].wind.deg : null,
-        wind_gust: (data.list[0].wind.gust) ? data.list[0].wind.gust : null,
-        rain_1h: (data.list[0].rain) ? data.list[0].rain["1h"] : null,
-        rain_3h: (data.list[0].rain) ? data.list[0].rain["3h"] : null,
-        snow_1h: (data.list[0].snow) ? data.list[0].snow["1h"] : null,
-        snow_3h: (data.list[0].snow) ? data.list[0].snow["3h"] : null,
-        clouds: (data.list[0].clouds.all) ? data.list[0].clouds.all : null,
-        sunrise: (data.city.sunrise) ? convertTimestamp(data.city.sunrise, languageCode, timeZoneString) : null,
-        sunset: (data.city.sunset) ? convertTimestamp(data.city.sunset, languageCode, timeZoneString) : null,
-        timezone: (data.city.timezone) ? data.city.timezone : null,
-        datetime: (data.list[0].dt) ? convertTimestamp(data.list[0].dt, languageCode, timeZoneString) : null,
-        base: (data.list[0].base) ? data.list[0].base : null,
-        visibility: (data.list[0].visibility) ? data.list[0].visibility : null,
     }
 }
 
