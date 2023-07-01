@@ -78,22 +78,23 @@ export const requestWeeklyObject = (data) => {
     const languageCode = "tr-TR";
     const timeZoneString = "Europe/Istanbul";
 
-    let days = {};
+    //let days = {};
+    let days = [];
 
     if(!data.list){
         return days;
     }
     for (let i = 0; i < data.list.length; i++) {
-        let day = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
+        //let day = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
         //let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
-        let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1];
-        if(!days[day]){
+        /*if(!days[day]){
             days[day] = [];
-        }
-        days[day].push({
+        }*/
+        //days[day].push({
+        days.push({
             datetime: (data.list[i].dt) ? convertTimestamp(data.list[i].dt, languageCode, timeZoneString) : null,
             date: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0],
-            time: time,
+            time: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1],
             temp: (data.list[i].main.temp) ? data.list[i].main.temp : null,
             temp_feels_like: (data.list[i].main.feels_like) ? data.list[i].main.feels_like : null,
             temp_min: (data.list[i].main.temp_min) ? data.list[i].main.temp_min : null,
