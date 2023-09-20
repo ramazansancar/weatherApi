@@ -12,6 +12,7 @@ import * as mainController from "../controllers/main/index.js";
 router.get("/", mainController.main);
 router.get("/healthCheck", mainController.healthCheck);
 
+router.get("/weather/weekly/daily/:city", weatherController.getWeeklyDailyWeatherList)
 router.get("/weather/weekly/:lat/:long", weatherController.getWeeklyWeatherListbyLatLong)
 router.get("/weather/weekly/:city", weatherController.getWeeklyWeatherListbyCity)
 router.get("/weather/find/:lat/:long", weatherController.getWeatherListbyLatLong)

@@ -1,24 +1,38 @@
 # weatherApi
 
-## Example Requests:
+This is a simple weather api. It uses the [OpenWeather API](https://openweathermap.org/api)
+
+## Example Requests
 
 - Health Check
-    - https://weatherapi.cyclic.app/healthcheck
+  - https://weatherapi.cyclic.app/healthcheck
 
 - Weather Now by Lat/Long
-    - https://weatherapi.cyclic.app/weather/30.1667/39.8333?units=metric&lang=tr
+  - https://weatherapi.cyclic.app/weather/30.1667/39.8333?units=metric&lang=tr
 
 - Weather Now by City Name
-    - https://weatherapi.cyclic.app/weather/Ankara?units=metric&lang=tr
+  - https://weatherapi.cyclic.app/weather/Ankara?units=metric&lang=tr
 
 - Weather Find by Lat/Long
-    - https://weatherapi.cyclic.app/weather/find/30.1667/39.8333?units=metric&lang=tr&count=2 (Count max: 50)
+  - https://weatherapi.cyclic.app/weather/find/30.1667/39.8333?units=metric&lang=tr&count=2 (Count max: 50)
 
 - Weather Weekly by Lat/Long
-    - https://weatherapi.cyclic.app/weather/weekly/30.1667/39.8333?units=metric&lang=tr&count=40 (Count max: 40)
+  - https://weatherapi.cyclic.app/weather/weekly/30.1667/39.8333?units=metric&lang=tr&count=40 (Count max: 40)
 
 - Weather Weekly by City Name
-    - https://weatherapi.cyclic.app/weather/weekly/Ankara?units=metric&lang=tr&count=40 (Count max: 40)
+  - https://weatherapi.cyclic.app/weather/weekly/Ankara?units=metric&lang=tr&count=40 (Count max: 40)
+
+- Weather Weekly Daily by City Name (This API is not available on free plan)
+  - https://weatherapi.cyclic.app/weather/weekly/daily/Ankara?units=metric&lang=tr&count=5&api=[OpenWeatherApiKey] (Count max: 16)
+
+## Parameters
+
+| Parameter | Description |
+| -- | -- |
+| units | standart, metric, imperial |
+| api | OpenWeather API Key (optional) |
+| lang | Language Code |
+| count | Count of days |
 
 ## Metrics
 
@@ -28,7 +42,7 @@
 | metric |
 | imperial |
 
-## Langs
+## Languages
 
 | Lang Code | Language Name |
 | -- | -- |

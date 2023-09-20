@@ -1,3 +1,7 @@
+// Constant: functions/helpers.js
+const languageCode = "tr-TR";
+const timeZoneString = "Europe/Istanbul";
+
 export const errorMessage = (res, message, parameters = {}, result = {}, status = 400, errorCode = null) => {
     if(typeof status === "string" || status === null || status === ""){
         status = 400
@@ -34,8 +38,6 @@ export const convertTimestamp = (date, languageCode, timeZoneString) => {
 }
 
 export const resultObject = (data) => {
-    const languageCode = "tr-TR";
-    const timeZoneString = "Europe/Istanbul";
 
     if(!data){
         return {};
@@ -76,9 +78,6 @@ export const resultObject = (data) => {
 }
 
 export const requestWeeklyObject = (data) => {
-    const languageCode = "tr-TR";
-    const timeZoneString = "Europe/Istanbul";
-
     //let days = {};
     let days = [];
 
@@ -86,38 +85,39 @@ export const requestWeeklyObject = (data) => {
         return days;
     }
     for (let i = 0; i < data.list.length; i++) {
-        //let day = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
-        //let time = convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
+        let item = data.list[i]
+        //let day = convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
+        //let time = convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
         /*if(!days[day]){
             days[day] = [];
         }*/
         //days[day].push({
         days.push({
             id: i+1,
-            datetime: (data.list[i].dt) ? convertTimestamp(data.list[i].dt, languageCode, timeZoneString) : null,
-            date: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[0],
-            time: convertTimestamp(data.list[i].dt, languageCode, timeZoneString).split(" ")[1],
-            temp: (data.list[i].main.temp) ? data.list[i].main.temp : null,
-            temp_feels_like: (data.list[i].main.feels_like) ? data.list[i].main.feels_like : null,
-            temp_min: (data.list[i].main.temp_min) ? data.list[i].main.temp_min : null,
-            temp_max: (data.list[i].main.temp_max) ? data.list[i].main.temp_max : null,
-            temp_kf: (data.list[i].main.temp_kf) ? data.list[i].main.temp_kf : null,
-            pressure: (data.list[i].main.pressure) ? data.list[i].main.pressure : null,
-            humidity: (data.list[i].main.humidity) ? data.list[i].main.humidity : null,
-            sea_level: (data.list[i].main.sea_level) ? data.list[i].main.sea_level : null,
-            grnd_level: (data.list[i].main.grnd_level) ? data.list[i].main.grnd_level : null,
-            weather: (data.list[i].weather[0].main) ? data.list[i].weather[0].main : null,
-            weather_id: (data.list[i].weather[0].id) ? data.list[i].weather[0].id : null,
-            weather_description: (data.list[i].weather[0].description) ? data.list[i].weather[0].description : null,
-            weather_icon: (data.list[i].weather[0].icon) ? data.list[i].weather[0].icon : null,
-            clouds: (data.list[i].clouds.all) ? data.list[i].clouds.all : null,
-            wind_speed: (data.list[i].wind.speed) ? data.list[i].wind.speed : null,
-            wind_deg: (data.list[i].wind.deg) ? data.list[i].wind.deg : null,
-            wind_gust: (data.list[i].wind.gust) ? data.list[i].wind.gust : null,
-            rain_pop: (data.list[i].pop) ? data.list[i].pop*100 : null,
-            rain_3h: (data.list[i].rain) ? data.list[i].rain["3h"] : null,
-            snow_3h: (data.list[i].snow) ? data.list[i].snow["3h"] : null,
-            pod: (data.list[i].sys.pod) ? (data.list[i].sys.pod === "n" ? "night" : (data.list[i].sys.pod === "d" ? "day" : data.list[i].sys.pod)) : null,
+            datetime: (item.dt) ? convertTimestamp(item.dt, languageCode, timeZoneString) : null,
+            date: convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[0],
+            time: convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[1],
+            temp: (item.main.temp) ? item.main.temp : null,
+            temp_feels_like: (item.main.feels_like) ? item.main.feels_like : null,
+            temp_min: (item.main.temp_min) ? item.main.temp_min : null,
+            temp_max: (item.main.temp_max) ? item.main.temp_max : null,
+            temp_kf: (item.main.temp_kf) ? item.main.temp_kf : null,
+            pressure: (item.main.pressure) ? item.main.pressure : null,
+            humidity: (item.main.humidity) ? item.main.humidity : null,
+            sea_level: (item.main.sea_level) ? item.main.sea_level : null,
+            grnd_level: (item.main.grnd_level) ? item.main.grnd_level : null,
+            weather: (item.weather[0].main) ? item.weather[0].main : null,
+            weather_id: (item.weather[0].id) ? item.weather[0].id : null,
+            weather_description: (item.weather[0].description) ? item.weather[0].description : null,
+            weather_icon: (item.weather[0].icon) ? item.weather[0].icon : null,
+            clouds: (item.clouds.all) ? item.clouds.all : null,
+            wind_speed: (item.wind.speed) ? item.wind.speed : null,
+            wind_deg: (item.wind.deg) ? item.wind.deg : null,
+            wind_gust: (item.wind.gust) ? item.wind.gust : null,
+            rain_pop: (item.pop) ? item.pop*100 : null,
+            rain_3h: (item.rain) ? item.rain["3h"] : null,
+            snow_3h: (item.snow) ? item.snow["3h"] : null,
+            pod: (item.sys.pod) ? (item.sys.pod === "n" ? "night" : (item.sys.pod === "d" ? "day" : item.sys.pod)) : null,
         });
     }
 
@@ -132,6 +132,62 @@ export const requestWeeklyObject = (data) => {
         timezone: (data.city.timezone) ? data.city.timezone : null,
         sunrise: (data.city.sunrise) ? convertTimestamp(data.city.sunrise, languageCode, timeZoneString) : null,
         sunset: (data.city.sunset) ? convertTimestamp(data.city.sunset, languageCode, timeZoneString) : null,
+        days
+    }
+}
+
+export const requestWeeklyDailyObject = (data) => {
+    let days = [];
+
+    if(!data.list){
+        return days;
+    }
+    for (let i = 0; i < data.list.length; i++) {
+        let item = data.list[i]
+        //let day = convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[0].replace(".", "-").replace(".", "-");
+        //let time = convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[1].replace(/:/g, "_").split("_").slice(0, 2).join("_");
+        /*if(!days[day]){
+            days[day] = [];
+        }*/
+        //days[day].push({
+        
+        days.push({
+            id: i+1,
+            datetime: (item.dt) ? convertTimestamp(item.dt, languageCode, timeZoneString) : null,
+            date: convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[0],
+            time: convertTimestamp(item.dt, languageCode, timeZoneString).split(" ")[1],
+            temp_day: (item.temp.day) ? item.temp.day : null,
+            temp_min: (item.temp.min) ? item.temp.min : null,
+            temp_max: (item.temp.max) ? item.temp.max : null,
+            temp_night: (item.temp.night) ? item.temp.night : null,
+            temp_eve: (item.temp.eve) ? item.temp.eve : null,
+            temp_morn: (item.temp.morn) ? item.temp.morn : null,
+            pressure: (item.pressure) ? item.pressure : null,
+            humidity: (item.humidity) ? item.humidity : null,
+            weather: (item.weather[0].main) ? item.weather[0].main : null,
+            weather_id: (item.weather[0].id) ? item.weather[0].id : null,
+            weather_description: (item.weather[0].description) ? item.weather[0].description : null,
+            weather_icon: (item.weather[0].icon) ? item.weather[0].icon : null,
+            clouds: (item.clouds) ? item.clouds : null,
+            wind_speed: (item.speed) ? item.speed : null,
+            wind_deg: (item.deg) ? item.deg : null,
+            wind_gust: (item.gust) ? item.gust : null,
+            rain_pop: (item.pop) ? item.pop*100 : null,
+            rain: (item.rain) ? item.rain*100 : null,
+            sunrise: (item.sunrise) ? convertTimestamp(item.sunrise, languageCode, timeZoneString) : null,
+            sunset: (item.sunset) ? convertTimestamp(item.sunset, languageCode, timeZoneString) : null,
+        });
+    }
+
+    return {
+        cod: (data.cod) ? data.cod : null,
+        id: (data.city.id) ? data.city.id : null,
+        name: (data.city.name) ? data.city.name : null,
+        country: (data.city.country) ? countryConverter(data.city.country) : null,
+        population: (data.city.population) ? data.city.population : null,
+        lat: (data.city.coord.lat) ? data.city.coord.lat : null,
+        long: (data.city.coord.lon) ? data.city.coord.lon : null,
+        timezone: (data.city.timezone) ? data.city.timezone : null,
         days
     }
 }
