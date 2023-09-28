@@ -83,7 +83,7 @@ This is a simple weather api. It uses the [OpenWeather API](https://openweatherm
 | sv, se | Swedish |
 | sk | Slovak |
 | sl | Slovenian |
-| sp, | es | Spanish |
+| sp, es | Spanish |
 | sr | Serbian |
 | th | Thai |
 | tr | Turkish |
