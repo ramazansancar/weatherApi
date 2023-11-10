@@ -92,3 +92,56 @@ This is a simple weather api. It uses the [OpenWeather API](https://openweatherm
 | zh_cn | Chinese | Simplified |
 | zh_tw | Chinese | Traditional |
 | zu | Zulu |
+
+## Temperature Colors
+
+```
+css
+.temp-0 { /* -17.8 */
+  color: #9c2fae;
+}
+
+.temp-1-10 { /* -17.2 - -12.2 */
+  color: #663fb4;
+}
+
+.temp-11-20 { /* -11.7 - -6.7 */
+  color: #4055b2;
+}
+
+.temp-21-30 { /* -6.1 - -1.1 */
+  color: #587cf7;
+}
+
+.temp-31-40 { /* -0.6 - 4.4 */
+  color: #1daaf1;
+}
+
+.temp-41-50 { /* 4.9 - 10 */
+  color: #1ebdd0;
+}
+
+.temp-51-60 { /* 10.6 - 15.6 */
+  color: #159588;
+}
+
+.temp-61-70 { /* 16.1 - 21.1 */
+  color: #2d9a2d;
+}
+
+.temp-71-80 { /* 21.7 - 26.7 */
+  color: #8cc051;
+}
+
+.temp-81-90 { /* 27.2 - 32.2 */
+  color: #fdc12f;
+}
+
+.temp-91-100 { /* 32.8 - 37.8 */
+  color: #fd9728;
+}
+
+.temp-101 { /* 38.3 */
+  color: #fb582f;
+}
+```
