@@ -2,6 +2,7 @@ import axios from "axios";
 import asyncHandler from "express-async-handler";
 
 import {
+    nullCheck,
     errorMessage,
     successMessage,
     resultObject,
@@ -11,7 +12,11 @@ import {
 import dotenv from "dotenv";
 dotenv.config();
 
-let weatherApiKey = process.env.OPENWEATHERMAP_API_KEY;
+const {
+    OPENWEATHERMAP_API_KEY
+} = process.env;
+
+let weatherApiKey = OPENWEATHERMAP_API_KEY;
 
 const weatherApi = axios.create({
     baseURL: "https://api.openweathermap.org/data/2.5/",
@@ -27,9 +32,9 @@ const weatherApi = axios.create({
 // @access  Public
 export const getWeatherbyCity = asyncHandler(async (req, res) => {
     const { city } = req.params;
-    const { units, lang, api } = req.query;
+    const { units, lang, apiKey } = req.query;
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     const { data } = await weatherApi.get(`weather?appid=${weatherApiKey}&q=${decodeURI(city)}&lang=${(lang)?lang:"en"}&units=${(units)?units:"metrics"}`).catch((err) => {
         err.config.url = (err.config.url) ? err.config.url.replace(weatherApiKey, "[secret]") : null;
@@ -51,11 +56,11 @@ export const getWeatherbyCity = asyncHandler(async (req, res) => {
 // @access  Public
 export const getWeatherbyLatLong = asyncHandler(async (req, res) => {
     let { lat, long } = req.params;
-    let { units, lang, api } = req.query;
+    let { units, lang, apiKey } = req.query;
     lat = parseFloat(lat);
     long = parseFloat(long);
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if(!lat || !long) return errorMessage(res, "Lat and Long are required", {"params":req.params,"query":req.query}, "Lat and Long are required", 400);
 
@@ -79,9 +84,9 @@ export const getWeatherbyLatLong = asyncHandler(async (req, res) => {
 // @access  Public
 export const getWeather = asyncHandler(async (req, res) => {
     const { city, lat, long } = req.params;
-    const { units, lang, api } = req.query;
+    const { units, lang, apiKey } = req.query;
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if (city) {
         const { data } = await weatherApi.get(`weather?appid=${weatherApiKey}&q=${decodeURI(city)}&lang=${(lang)?lang:"en"}&units=${(units)?units:"metrics"}`).catch((err) => {
@@ -121,12 +126,12 @@ export const getWeather = asyncHandler(async (req, res) => {
 // @access  Public
 export const getWeatherListbyLatLong = asyncHandler(async (req, res) => {
     let { lat, long } = req.params;
-    let { units, lang, count, api } = req.query;
+    let { units, lang, count, apiKey } = req.query;
     lat = parseFloat(lat);
     long = parseFloat(long);
     count = parseInt(count);
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if(!lat || !long) return errorMessage(res, "Lat and Long are required", {"params":req.params,"query":req.query}, "Lat and Long are required", 400);
     if(isNaN(count)) return errorMessage(res, "Count must be a number", {"params":req.params,"query":req.query}, "Count must be a number", 400);
@@ -155,10 +160,10 @@ export const getWeatherListbyLatLong = asyncHandler(async (req, res) => {
 // @access  Public
 export const getWeeklyWeatherListbyCity = asyncHandler(async (req, res) => {
     const { city } = req.params;
-    let { units, lang, count, api } = req.query;
+    let { units, lang, count, apiKey } = req.query;
     count = parseInt(count);
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if(isNaN(count)) return errorMessage(res, "Count must be a number", {"params":req.params,"query":req.query}, "Count must be a number", 400);
     if(count < 1) return errorMessage(res, "Count must be greater than 1", {"params":req.params,"query":req.query}, "Count must be greater than 1", 400);
@@ -184,12 +189,12 @@ export const getWeeklyWeatherListbyCity = asyncHandler(async (req, res) => {
 // @access  Public
 export const getWeeklyWeatherListbyLatLong = asyncHandler(async (req, res) => {
     let { lat, long } = req.params;
-    let { units, lang, count, api } = req.query;
+    let { units, lang, count, apiKey } = req.query;
     lat = parseFloat(lat);
     long = parseFloat(long);
     count = parseInt(count);
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if(!lat || !long) return errorMessage(res, "Lat and Long are required", {"params":req.params,"query":req.query}, "Lat and Long are required", 400);
     if(isNaN(count)) return errorMessage(res, "Count must be a number", {"params":req.params,"query":req.query}, "Count must be a number", 400);
@@ -217,10 +222,10 @@ export const getWeeklyWeatherListbyLatLong = asyncHandler(async (req, res) => {
 // @note    This API is not available on free plan
 export const getWeeklyDailyWeatherList = asyncHandler(async (req, res) => {
     const { city } = req.params;
-    let { units, lang, count, api } = req.query;
+    let { units, lang, count, apiKey } = req.query;
     count = parseInt(count);
 
-    if(api !== null || api !== undefined) weatherApiKey = api;
+    if(nullCheck(apiKey) !== null) weatherApiKey = apiKey;
 
     if(isNaN(count)) return errorMessage(res, "Count must be a number", {"params":req.params,"query":req.query}, "Count must be a number", 400);
     if(count < 1) return errorMessage(res, "Count must be greater than 1", {"params":req.params,"query":req.query}, "Count must be greater than 1", 400);

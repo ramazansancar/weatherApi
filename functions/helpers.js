@@ -2,6 +2,10 @@
 const languageCode = "tr-TR";
 const timeZoneString = "Europe/Istanbul";
 
+export const nullCheck = (value) => {
+    return (value === null || value === undefined || value === "" || value === "null" || value === "undefined" || value === "NaN" || value === NaN || value === " " || value === '-') ? null : value;
+}
+
 export const errorMessage = (res, message, parameters = {}, result = {}, status = 400, errorCode = null) => {
     if(typeof status === "string" || status === null || status === ""){
         status = 400

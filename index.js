@@ -18,8 +18,11 @@ app.all("*", function(req, res, next) {
 
 app.use("/", apiRouters)
 
-app.listen(process.env.PORT || "5000", async () => {
+const port = process.env.PORT || "5000";
+const url = process.env.URL || "http://localhost";
+
+app.listen(port, async () => {
     // db.sequelize.sync();
     // db.sequelize.sync({ force: true });
-    console.log(`server started! Port: ${process.env.URL}`)
+    console.log(`server started! Port: ${url}:${port}`)
 })

@@ -23,14 +23,14 @@ This is a simple weather api. It uses the [OpenWeather API](https://openweatherm
   - https://weatherapi.cyclic.app/weather/weekly/Ankara?units=metric&lang=tr&count=40 (Count max: 40)
 
 - Weather Weekly Daily by City Name (This API is not available on free plan)
-  - https://weatherapi.cyclic.app/weather/weekly/daily/Ankara?units=metric&lang=tr&count=5&api= [OpenWeatherApiKey] (Count max: 16)
+  - https://weatherapi.cyclic.app/weather/weekly/daily/Ankara?units=metric&lang=tr&count=5&apiKey= [OpenWeatherApiKey] (Count max: 16)
 
 ## Parameters
 
 | Parameter | Description |
 | -- | -- |
 | units | standart, metric, imperial |
-| api | OpenWeather API Key (optional) |
+| apiKey | OpenWeather API Key (optional) |
 | lang | Language Code |
 | count | Count of days |
 
