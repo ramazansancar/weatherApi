@@ -3,7 +3,16 @@ const languageCode = "tr-TR";
 const timeZoneString = "Europe/Istanbul";
 
 export const nullCheck = (value) => {
-    return (value === null || value === undefined || value === "" || value === "null" || value === "undefined" || value === "NaN" || value === NaN || value === " " || value === '-') ? null : value;
+    if(typeof value === "string"){
+        value = value.trim()
+        value.replace(/(\r\n|\n|\r)/gm, "");
+        // 2 space conver to 1 space
+        value = value.replace(/  +/g, ' ');
+    }
+    if(typeof value === "object"){
+        return value
+    }
+    return (value === null || value === undefined || value === "" || value === "null" || value === "undefined" || value === "NaN" || value === NaN || value === " " || value === '-' || value.length === 0) ? null : value;
 }
 
 export const errorMessage = (res, message, parameters = {}, result = {}, status = 400, errorCode = null) => {
@@ -21,17 +30,43 @@ export const errorMessage = (res, message, parameters = {}, result = {}, status 
         })
 }
 
-export const successMessage = (res, data, message = "request successful.", parameters = {}, status = 200) => {
+export const successMessage = (res, data, message = "request successful.", parameters = {}, meta = {}, status = 200) => {
     if(typeof status === "string" || status === null || status === ""){
         status = 200
     }
-
+    
+    let alternativeDataStatus = false;
+    let count = 0;
+    if(data?.main){
+        count = data.main.length
+    }
+    if(data?.alternativeData){
+        count = data.alternativeData.length
+    }
+    if(data?.length){
+        count = data.length
+    }
+    let response = [];
+    if(data?.main){
+        response = data.main
+    }else{
+        response = data
+    }
+    if(data?.alternativeData){
+        response =  data.alternativeData
+        alternativeDataStatus = true
+    }
     return res
         .status(status)
         .json({
             success: true,
             message,
             parameters,
+            meta: {
+                alternativeDataStatus,
+                count,
+                ...meta
+            },
             data
         })
 }
@@ -81,7 +116,7 @@ export const resultObject = (data) => {
     }
 }
 
-export const requestWeeklyObject = (data) => {
+export const responseWeeklyObject = (data) => {
     //let days = {};
     let days = [];
 
@@ -140,7 +175,7 @@ export const requestWeeklyObject = (data) => {
     }
 }
 
-export const requestWeeklyDailyObject = (data) => {
+export const responseWeeklyDailyObject = (data) => {
     let days = [];
 
     if(!data.list){

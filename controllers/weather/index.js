@@ -6,8 +6,8 @@ import {
     errorMessage,
     successMessage,
     resultObject,
-    requestWeeklyObject,
-    requestWeeklyDailyObject,
+    responseWeeklyObject,
+    responseWeeklyDailyObject,
 } from "../../functions/helpers.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -178,7 +178,7 @@ export const getWeeklyWeatherListbyCity = asyncHandler(async (req, res) => {
     if(parseInt(data.cod) === 401) return errorMessage(res, "API Key is invalid! See here: https://openweathermap.org/faq#error401", {"params":req.params,"query":req.query}, "API Key is invalid", 401);
     
     if (parseInt(data.cod) === 200) {
-        return successMessage(res, requestWeeklyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
+        return successMessage(res, responseWeeklyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
     } else {
         return errorMessage(res, "404 Not Found", {"params":req.params,"query":req.query}, "404 Not Found", 404);
     }
@@ -210,7 +210,7 @@ export const getWeeklyWeatherListbyLatLong = asyncHandler(async (req, res) => {
     if(parseInt(data.cod) === 401) return errorMessage(res, "API Key is invalid! See here: https://openweathermap.org/faq#error401", {"params":req.params,"query":req.query}, "API Key is invalid", 401);
     
     if (data.cod === "200") {
-        return successMessage(res, requestWeeklyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
+        return successMessage(res, responseWeeklyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
     } else {
         return errorMessage(res, "404 Not Found", {"params":req.params,"query":req.query}, "404 Not Found", 404);
     }
@@ -240,7 +240,7 @@ export const getWeeklyDailyWeatherList = asyncHandler(async (req, res) => {
     if(parseInt(data.cod) === 401) return errorMessage(res, "API Key is invalid! See here: https://openweathermap.org/faq#error401", {"params":req.params,"query":req.query}, "API Key is invalid", 401);
     
     if (parseInt(data.cod) === 200) {
-        return successMessage(res, requestWeeklyDailyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
+        return successMessage(res, responseWeeklyDailyObject(data), "Weather API up!", {"params":req.params,"query":req.query}, 200);
     } else {
         return errorMessage(res, "404 Not Found", {"params":req.params,"query":req.query}, "404 Not Found", 404);
     }
